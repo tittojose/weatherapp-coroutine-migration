@@ -2,10 +2,16 @@ package weatherapp.tittojose.me.weatherapp.ui.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -29,14 +35,18 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     @BindView(R.id.txtLocation)
     TextView locationTextView;
 
+    @BindView(R.id.imgViewLoading)
+    ImageView loadingImageView;
+
     @BindView(R.id.layoutLoading)
     ViewGroup loadingLayout;
 
     @BindView(R.id.layoutWeather)
-    ViewGroup weatherLayout;
+    ConstraintLayout weatherLayout;
 
     @BindView(R.id.layoutError)
     ViewGroup errorLayout;
+    private Animation startRotateAnimation;
 
 
     @Override
@@ -44,10 +54,17 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         ButterKnife.bind(this);
+        initializeAnimationObjects();
+
         weatherAPIClient = APIClient.getWeatherAPIClient();
 
         HomeScreenPresenter homeScreenPresenter = new HomeScreenPresenter(this, weatherAPIClient);
         homeScreenPresenter.loadWeatherData();
+
+    }
+
+    private void initializeAnimationObjects() {
+        startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
     }
 
     @Override
@@ -66,10 +83,12 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     @Override
     public void showLoading() {
         loadingLayout.setVisibility(View.VISIBLE);
+        loadingImageView.startAnimation(startRotateAnimation);
     }
 
     @Override
     public void hideLoading() {
+        loadingImageView.clearAnimation();
         loadingLayout.setVisibility(View.GONE);
     }
 
