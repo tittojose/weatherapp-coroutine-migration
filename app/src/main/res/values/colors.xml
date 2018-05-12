@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="background_color">#F5F6F7</color>
     <color name="background_error">#E85959</color>
+    <color name="current_weather">#2A2A2A</color>
+    <color name="forecast_day">#2A2A2A</color>
+    <color name="forecast_temperature">#2A2A2A</color>
 </resources>
