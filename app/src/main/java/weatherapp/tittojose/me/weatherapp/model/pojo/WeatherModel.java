@@ -9,4 +9,19 @@ public class WeatherModel {
 
     @SerializedName("forecast")
     private Forecast forecast;
+
+    @SerializedName("location")
+    Location location;
+
+    public Current getCurrent() {
+        return current;
+    }
+
+    public Forecast getForecast() {
+        return forecast;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
 }

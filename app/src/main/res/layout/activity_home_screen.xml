@@ -8,8 +8,9 @@
     tools:context=".ui.view.HomeScreenActivity">
 
     <include
-        android:visibility="gone"
+
         layout="@layout/layout_loading"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,16 +18,18 @@
 
 
     <include
-        android:visibility="gone"
+
         layout="@layout/layout_weather"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:visibility="gone"
+
         layout="@layout/layout_error"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

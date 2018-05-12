@@ -7,7 +7,9 @@ import java.util.List;
 public class Forecast {
 
     @SerializedName("forecastday")
-    private List<Forecastday> forecastday = null;
+    private List<ForecastDay> forecastDay = null;
 
-
+    public List<ForecastDay> getForecastDay() {
+        return forecastDay;
+    }
 }

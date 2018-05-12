@@ -8,4 +8,7 @@ public class Current {
     @SerializedName("temp_c")
     private Float tempC;
 
+    public Float getTempC() {
+        return tempC;
+    }
 }
