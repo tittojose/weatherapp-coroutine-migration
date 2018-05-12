@@ -19,14 +19,21 @@ public class HomeScreenPresenter {
 
 
     public void loadWeatherData() {
+        this.homeScreen.showLoading();
         this.weatherAPI.getWeatherForecast().enqueue(new Callback<WeatherModel>() {
             @Override
             public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
-                homeScreen.onWeatherDataLoadSuccess(response.body());
+                homeScreen.hideLoading();
+                if (response.isSuccessful()) {
+                    homeScreen.onWeatherDataLoadSuccess(response.body());
+                } else {
+                    homeScreen.onWeatherDataLoadFailed();
+                }
             }
 
             @Override
             public void onFailure(Call<WeatherModel> call, Throwable t) {
+                homeScreen.hideLoading();
                 homeScreen.onWeatherDataLoadFailed();
             }
         });

@@ -35,6 +35,16 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     }
 
     @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
     public void onRetryButtonClicked() {
 
     }

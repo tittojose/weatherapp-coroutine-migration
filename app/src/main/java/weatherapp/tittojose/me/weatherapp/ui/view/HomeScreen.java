@@ -7,5 +7,9 @@ public interface HomeScreen {
 
     void onWeatherDataLoadFailed();
 
+    void showLoading();
+
+    void hideLoading();
+
     void onRetryButtonClicked();
 }
