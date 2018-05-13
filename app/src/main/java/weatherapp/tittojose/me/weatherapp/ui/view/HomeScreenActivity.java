@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,9 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     @BindView(R.id.txtLocation)
     TextView locationTextView;
 
+    @BindView(R.id.btnRetry)
+    Button retryButton;
+
     @BindView(R.id.imgViewLoading)
     ImageView loadingImageView;
 
@@ -47,6 +51,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     @BindView(R.id.layoutError)
     ViewGroup errorLayout;
     private Animation startRotateAnimation;
+    private HomeScreenPresenter homeScreenPresenter;
 
 
     @Override
@@ -58,8 +63,14 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
 
         weatherAPIClient = APIClient.getWeatherAPIClient();
 
-        HomeScreenPresenter homeScreenPresenter = new HomeScreenPresenter(this, weatherAPIClient);
+        homeScreenPresenter = new HomeScreenPresenter(this, weatherAPIClient);
         homeScreenPresenter.loadWeatherData();
+        retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRetryButtonClicked();
+            }
+        });
 
     }
 
@@ -94,7 +105,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
 
     @Override
     public void onRetryButtonClicked() {
-
+        homeScreenPresenter.retryLoadWeatherData();
     }
 
 
