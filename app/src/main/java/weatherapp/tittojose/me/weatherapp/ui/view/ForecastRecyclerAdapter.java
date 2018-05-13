@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import weatherapp.tittojose.me.weatherapp.R;
+import weatherapp.tittojose.me.weatherapp.Utils;
 import weatherapp.tittojose.me.weatherapp.model.pojo.Forecast;
 import weatherapp.tittojose.me.weatherapp.model.pojo.ForecastDay;
 
@@ -32,7 +33,7 @@ class ForecastRecyclerAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ForecastDay forecastDay = forecast.getForecastDay().get(position);
         ForecastViewHolder viewHolder = (ForecastViewHolder) holder;
-        viewHolder.forecastDay.setText(forecastDay.getDate());
+        viewHolder.forecastDay.setText(Utils.getDayOfWeekFromDateString(forecastDay.getDate()));
         viewHolder.forecastTemperature.setText(String.format("%s%s", forecastDay.getDay().getAvgtempC(), (char) 0x00B0));
     }
 

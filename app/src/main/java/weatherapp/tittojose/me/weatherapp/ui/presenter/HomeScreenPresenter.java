@@ -1,45 +1,70 @@
 package weatherapp.tittojose.me.weatherapp.ui.presenter;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import weatherapp.tittojose.me.weatherapp.model.WeatherAPI;
 import weatherapp.tittojose.me.weatherapp.model.pojo.WeatherModel;
+import weatherapp.tittojose.me.weatherapp.repository.WeatherRepositoryContract;
 import weatherapp.tittojose.me.weatherapp.ui.view.HomeScreen;
 
-public class HomeScreenPresenter {
+public class HomeScreenPresenter implements HomePresenterContract {
 
+    private final WeatherRepositoryContract.WeatherLoadListener weatherLoadListener;
     private HomeScreen homeScreen;
-    private WeatherAPI weatherAPI;
+    private WeatherRepositoryContract weatherRepository;
 
-    public HomeScreenPresenter(HomeScreen homeScreen, WeatherAPI weatherAPIClient) {
+
+    public HomeScreenPresenter(final HomeScreen homeScreen, WeatherRepositoryContract weatherRepository) {
         this.homeScreen = homeScreen;
-        this.weatherAPI = weatherAPIClient;
-    }
-
-
-    public void loadWeatherData() {
-        this.homeScreen.showLoading();
-        this.weatherAPI.getWeatherForecast().enqueue(new Callback<WeatherModel>() {
+        this.weatherRepository = weatherRepository;
+        weatherLoadListener = new WeatherRepositoryContract.WeatherLoadListener() {
             @Override
-            public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
+            public void onWeatherDataLoadedSuccess(WeatherModel weatherModel) {
                 homeScreen.hideLoading();
-                if (response.isSuccessful()) {
-                    homeScreen.onWeatherDataLoadSuccess(response.body());
-                } else {
-                    homeScreen.onWeatherDataLoadFailed();
-                }
+                homeScreen.onWeatherDataLoadSuccess(weatherModel);
             }
 
             @Override
-            public void onFailure(Call<WeatherModel> call, Throwable t) {
+            public void onWeatherDataLoadedFailed() {
                 homeScreen.hideLoading();
                 homeScreen.onWeatherDataLoadFailed();
             }
-        });
+        };
+        this.weatherRepository.setWeatherLoadListener(weatherLoadListener);
     }
 
+
+    @Override
+    public void loadWeatherData() {
+        this.homeScreen.showLoading();
+        this.weatherRepository.getWeatherData();
+
+//        this.homeScreen.showLoading();
+//
+//
+//        this.weatherAPI.getWeatherForecast().enqueue(new Callback<WeatherModel>() {
+//            @Override
+//            public void onResponse(Call<WeatherModel> call, Response<WeatherModel> response) {
+//                homeScreen.hideLoading();
+//                if (response.isSuccessful()) {
+//                    homeScreen.onWeatherDataLoadSuccess(response.body());
+//                } else {
+//                    homeScreen.onWeatherDataLoadFailed();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<WeatherModel> call, Throwable t) {
+//                homeScreen.hideLoading();
+//                homeScreen.onWeatherDataLoadFailed();
+//            }
+//        });
+
+//        this.homeScreen.showLoading();
+//        getObservable().subscribeWith(getObserver());
+    }
+
+    @Override
     public void retryLoadWeatherData() {
         loadWeatherData();
     }
+
 }
