@@ -18,9 +18,14 @@ public class Utils {
         return result;
     }
 
-    public static String getDegreeCelsiusData(Float tempC) {
+    public static String formatDegreeCelsiusData(Float tempC) {
         Integer tempInt = Math.round(tempC);
         return String.format("%s%s", tempInt, (char) 0x00B0);
 
+    }
+
+    public static String formatDegreeCelsiusDataForAdapter(Float avgtempC) {
+        Integer tempInt = Math.round(avgtempC);
+        return String.format("%s %s", tempInt, 'C');
     }
 }

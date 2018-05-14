@@ -119,7 +119,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     }
 
     private void setCurrentWeatherData(WeatherModel weatherData) {
-        currentTemperatureTextView.setText(Utils.getDegreeCelsiusData(weatherData.getCurrent().getTempC()));
+        currentTemperatureTextView.setText(Utils.formatDegreeCelsiusData(weatherData.getCurrent().getTempC()));
         locationTextView.setText(weatherData.getLocation().getLocationName());
     }
 }
