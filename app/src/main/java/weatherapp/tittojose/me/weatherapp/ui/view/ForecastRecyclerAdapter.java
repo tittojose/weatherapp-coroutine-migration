@@ -34,7 +34,7 @@ class ForecastRecyclerAdapter extends RecyclerView.Adapter {
         ForecastDay forecastDay = forecast.getForecastDay().get(position);
         ForecastViewHolder viewHolder = (ForecastViewHolder) holder;
         viewHolder.forecastDay.setText(Utils.getDayOfWeekFromDateString(forecastDay.getDate()));
-        viewHolder.forecastTemperature.setText(String.format("%s%s", forecastDay.getDay().getAvgtempC(), (char) 0x00B0));
+        viewHolder.forecastTemperature.setText(Utils.getDegreeCelsiusData(forecastDay.getDay().getAvgtempC()));
     }
 
     @Override

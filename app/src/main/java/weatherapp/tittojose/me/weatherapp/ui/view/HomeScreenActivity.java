@@ -16,6 +16,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import weatherapp.tittojose.me.weatherapp.R;
+import weatherapp.tittojose.me.weatherapp.Utils;
 import weatherapp.tittojose.me.weatherapp.model.APIClient;
 import weatherapp.tittojose.me.weatherapp.model.WeatherAPI;
 import weatherapp.tittojose.me.weatherapp.model.pojo.WeatherModel;
@@ -52,6 +53,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
     ViewGroup errorLayout;
     private Animation startRotateAnimation;
     private HomeScreenPresenter homeScreenPresenter;
+    private Animation bottomUpAnimation;
 
 
     @Override
@@ -78,6 +80,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
 
     private void initializeAnimationObjects() {
         startRotateAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_rotate);
+        bottomUpAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.anim_bottomsup);
     }
 
     @Override
@@ -86,7 +89,6 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
         setCurrentWeatherData(weatherModel);
         setForecastWeatherData(weatherModel);
     }
-
 
     @Override
     public void onWeatherDataLoadFailed() {
@@ -113,11 +115,11 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
 
     private void setForecastWeatherData(WeatherModel weatherModel) {
         forecastRecyclerview.setAdapter(new ForecastRecyclerAdapter(weatherModel.getForecast()));
+        forecastRecyclerview.setAnimation(bottomUpAnimation);
     }
 
     private void setCurrentWeatherData(WeatherModel weatherData) {
-        currentTemperatureTextView.setText(String.format("%s%s", weatherData.getCurrent().getTempC(), (char) 0x00B0));
+        currentTemperatureTextView.setText(Utils.getDegreeCelsiusData(weatherData.getCurrent().getTempC()));
         locationTextView.setText(weatherData.getLocation().getLocationName());
     }
-
 }

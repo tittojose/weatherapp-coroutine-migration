@@ -17,4 +17,10 @@ public class Utils {
         }
         return result;
     }
+
+    public static String getDegreeCelsiusData(Float tempC) {
+        Integer tempInt = Math.round(tempC);
+        return String.format("%s%s", tempInt, (char) 0x00B0);
+
+    }
 }
