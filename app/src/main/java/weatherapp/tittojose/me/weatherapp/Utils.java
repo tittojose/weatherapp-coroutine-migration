@@ -20,7 +20,7 @@ public class Utils {
 
     public static String formatDegreeCelsiusData(Float tempC) {
         Integer tempInt = Math.round(tempC);
-        return String.format("%s%s", tempInt, (char) 0x00B0);
+        return String.format("%s%s", tempInt, "\u2103");
 
     }
 

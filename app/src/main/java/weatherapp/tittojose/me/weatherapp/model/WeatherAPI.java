@@ -6,7 +6,7 @@ import weatherapp.tittojose.me.weatherapp.model.pojo.WeatherModel;
 
 
 public interface WeatherAPI {
-    @GET("forecast.json?key=c9f43dcc3cde41dcb6e124416181205&q=bengaluru&days=4")
+    @GET("current?access_key=d96017976d32359af3e9394810025dcf&query=bengaluru")
     Call<WeatherModel> getWeatherForecast();
 
 }

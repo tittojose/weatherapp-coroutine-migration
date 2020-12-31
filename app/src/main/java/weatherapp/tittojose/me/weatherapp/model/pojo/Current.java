@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class Current {
 
 
-    @SerializedName("temp_c")
+    @SerializedName("temperature")
     private Float tempC;
 
     public Float getTempC() {

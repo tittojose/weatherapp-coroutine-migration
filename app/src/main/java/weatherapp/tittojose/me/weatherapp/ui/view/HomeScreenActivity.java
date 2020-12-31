@@ -114,7 +114,7 @@ public class HomeScreenActivity extends AppCompatActivity implements HomeScreen 
 
 
     private void setForecastWeatherData(WeatherModel weatherModel) {
-        forecastRecyclerview.setAdapter(new ForecastRecyclerAdapter(weatherModel.getForecast()));
+//        forecastRecyclerview.setAdapter(new ForecastRecyclerAdapter(weatherModel.getForecast()));
         forecastRecyclerview.setAnimation(bottomUpAnimation);
     }
 
